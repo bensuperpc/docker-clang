@@ -1,5 +1,10 @@
 FROM debian:bullseye
 
+LABEL author="silkeh <Silke Hofstra>"
+LABEL mantainer="Bensuperpc <bensuperpc@gmail.com>"
+ARG VERSION="1.0.0"
+ENV VERSION=$VERSION
+
 # Install dependencies
 RUN apt-get -qq update && \
     apt-get install -qqy --no-install-recommends \
@@ -22,3 +27,14 @@ ENV LLVM_VERSION 8.0.0
 # Install Clang and LLVM
 COPY install.sh .
 RUN ./install.sh
+
+LABEL org.label-schema.schema-version="1.0" \
+	  org.label-schema.build-date=$BUILD_DATE \
+	  org.label-schema.name="bensuperpc/docker-clang" \
+	  org.label-schema.description="build clang compiler" \
+	  org.label-schema.version=$VERSION \
+	  org.label-schema.vendor="Bensuperpc" \
+	  org.label-schema.url="http://bensuperpc.com/" \
+	  org.label-schema.vcs-url="https://github.com/Bensuperpc/docker-clang" \
+	  org.label-schema.vcs-ref=$VCS_REF \
+	  org.label-schema.docker.cmd="docker build -t bensuperpc/clang -f Dockerfile ."
