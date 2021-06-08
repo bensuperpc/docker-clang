@@ -30,14 +30,18 @@ jobs:
           submodules: 'recursive'
           fetch-depth: 0
       - name: "Build images"
-        run: docker build . -f ${{ matrix.version }}.Dockerfile -t silkeh/clang:${{ matrix.version }}
+        run: docker build . -f ${{ matrix.version }}.Dockerfile -t bensuperpc/clang:${{ matrix.version }}
       - name: "Test build C"
-        run: docker run --rm -v "$PWD/tests:/tests" silkeh/clang:${{ matrix.version }} clang tests/test.c -o /tests/test
+        run: docker run --rm -v "$PWD/tests:/tests" bensuperpc/clang:${{ matrix.version }} clang tests/test.c -o /tests/test
       - name: "Test run C"
-        run: docker run --rm -v "$PWD/tests:/tests" silkeh/clang:${{ matrix.version }} ./tests/test
+        run: docker run --rm -v "$PWD/tests:/tests" bensuperpc/clang:${{ matrix.version }} ./tests/test
       - name: "Test build CPP"
-        run: docker run --rm -v "$PWD/tests:/tests" silkeh/clang:${{ matrix.version }} clang++ tests/test.cpp -o /tests/test
+        run: docker run --rm -v "$PWD/tests:/tests" bensuperpc/clang:${{ matrix.version }} clang++ tests/test.cpp -o /tests/test
       - name: "Test run CPP"
-        run: docker run --rm -v "$PWD/tests:/tests" silkeh/clang:${{ matrix.version }} ./tests/test
+        run: docker run --rm -v "$PWD/tests:/tests" bensuperpc/clang:${{ matrix.version }} ./tests/test
+      - name: "Push to docker"
+        run: |
+            docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+            docker push bensuperpc/clang --all-tags
 
 
