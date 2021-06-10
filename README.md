@@ -1,5 +1,5 @@
 # Clang / LLVM docker containers
-[![docker](https://img.shields.io/docker/pulls/bensuperpc/clang.svg)](https://hub.docker.com/r/bensuperpc/clang/)
+[![docker](https://img.shields.io/docker/pulls/bensuperpc/clang.svg)](https://hub.docker.com/r/bensuperpc/clang/) [![docker-clang](https://github.com/bensuperpc/docker-clang/actions/workflows/main.yml/badge.svg)](https://github.com/bensuperpc/docker-clang/actions/workflows/main.yml)
 
 A collection of images containing official Clang/LLVM releases.
 
